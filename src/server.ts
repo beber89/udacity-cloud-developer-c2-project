@@ -44,16 +44,16 @@ import fs from 'fs';
     // ---------------------
     
     // Applying the filter on the image from the utils module
-    const filteredpath = await filterImageFromURL(image_url);
-    // image is being sent back to client
-    res.status(200).sendFile(filteredpath);
-    // Deleting image file in server
-    fs.unlink(filteredpath, (err) => {
-      if (err) {
-        return;
-      }
+    // const filteredpath = await filterImageFromURL(image_url);
+    await filterImageFromURL(image_url)
+    .then((outputImage) => {
+      console.log(outputImage);
+      // image is being sent back to client
+      res.status(200).sendFile(outputImage, {}, (err) => {
+        // Deleting image file in server
+        deleteLocalFiles([outputImage]);
+      })
     });
-
   });
   //! END @TODO1
   
