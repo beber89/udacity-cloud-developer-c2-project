@@ -31,9 +31,7 @@ import {filterImageFromURL, deleteLocalFiles, isValidUrl} from './util/util';
   app.get ("/filteredimage/",  async (req: Request, res: Response) => {
 
     // Parsing the image_url from the query in the url
-    const url = req.url;
-    const urlParams = new URLSearchParams(url.substr(url.indexOf('?') + 1 ));
-    const image_url = urlParams.get("image_url");
+    let { image_url } = req.query;
     // -----------------------------------------------
 
     // check if url is valid
